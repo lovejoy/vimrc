@@ -1,4 +1,4 @@
-" vgod's vimrc
+" vgod's vimrc 
 " Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
 " Fork me on GITHUB  https://github.com/vgod/vimrc
 
@@ -6,7 +6,7 @@
 
 
 " For pathogen.vim: auto load all plugins in .vim/bundle
-
+" modifed by lovejoy <lyq.0617@gmail.com>
 let g:pathogen_disabled = []
 if !has('gui_running')
    call add(g:pathogen_disabled, 'powerline')
@@ -130,8 +130,7 @@ let g:mapleader=","
 map <leader>r :call Replace()<CR>
 
 " open the error console
-map <leader>cc :botright cope<CR> 
-" move to next error
+map <leader>cc :botright cope<CR> " move to next error
 map <leader>] :cn<CR>
 " move to the prev error
 map <leader>[ :cp<CR>
@@ -196,6 +195,24 @@ cmap cd. lcd %:p:h
    noremap  <C-u>5 yypVr^
    inoremap <C-u>5 <esc>yypVr^A
 "}
+"快捷键
+map cal :Calendar<cr>
+let NERDTreeWinSize=22
+map ntree :NERDTree <cr>
+map nk :NERDTreeClose <cr>
+map <leader>n :NERDTreeToggle<cr>
+map cse :ColorSchemeExplorer
+
+"标签相关的快捷键 Ctrl
+map tn :tabnext<cr>
+map tp :tabprevious<cr>
+map tc :tabclose<cr>
+"map <C-t> :tabnew<cr>"
+map <C-p> :tabprevious<cr>
+map <C-n> :tabnext<cr>
+"map <C-w> :tabclose<cr>
+map <C-Tab> :tabnext<cr>
+
 
 "--------------------------------------------------------------------------- 
 " PROGRAMMING SHORTCUTS
@@ -238,6 +255,37 @@ set cot-=preview "disable doc preview in omnicomplete
 " make CSS omnicompletion work for SASS and SCSS
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 autocmd BufNewFile,BufRead *.sass             set ft=sass.css
+
+" 新建 XHTML 、PHP、Javascript 文件的快捷键
+nmap <C-c><C-h> :NewQuickTemplateTab xhtml<cr>
+nmap <C-c><C-p> :NewQuickTemplateTab php<cr>
+nmap <C-c><C-j> :NewQuickTemplateTab javascript<cr>
+nmap <C-c><C-c> :NewQuickTemplateTab css<cr>
+
+" 在文件名上按gf时，在新的tab中打开
+map gf :tabnew <cfile><cr>
+
+
+"jquery 配色
+au BufRead,BufNewFile *.js set syntax=jquery
+
+" jsLint for Vim
+let g:jslint_highlight_color  = '#996600'
+" 指定 jsLint 调用路径，通常不用更改
+let g:jslint_command = $HOME . '\/.vim\/bundle\/jslint.vim\/bin\/jsl'
+" 指定 jsLint 的启动参数，可以指定相应的配置文件
+let g:jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -process'
+
+
+" 返回当前时间
+func! GetTimeInfo()
+    "return strftime('%Y-%m-%d %A %H:%M:%S')
+    return strftime('%Y-%m-%d %H:%M:%S')
+endfunction
+
+" 插入模式按 Ctrl + D(ate) 插入当前时间
+imap <C-d> <C-r>=GetTimeInfo()<cr>
+
 
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
